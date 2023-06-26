@@ -1,6 +1,6 @@
 # SIG-Guest-Languages
 
-Special Interest Group (SIG) whose to coordinate the development of [WebAssembly Components](https://github.com/WebAssembly/component-model) into guest programming language ecosystems in a way that feels native to those ecosystems.
+Special Interest Group (SIG) coordinating the development of [WebAssembly Component](https://github.com/WebAssembly/component-model) support for guest programming language ecosystems in a way that feels native to those ecosystems.
 
 Goals of the group include:
 
