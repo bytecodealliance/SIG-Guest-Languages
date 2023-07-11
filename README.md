@@ -11,5 +11,5 @@ Goals of the group include:
 
 ### Meetings
 
-Details on meetings and agendas can be found [here](https://github.com/bytecodealliance/meetings/tree/main/SIG-guest-languages).
+Details on meetings and agendas can be found [here](https://github.com/bytecodealliance/meetings/tree/main/SIG-Guest-Languages).
 
