@@ -12,9 +12,10 @@ wit-bindgen = { version = "0.8.0", default_features = false }
 crate-type = ["cdylib"]
 
 [package.metadata.component]
-package = "component:numbers-runner"
+package = "test:numbers-runner"
 
 [package.metadata.component.target]
+world = "numbers-runner"
 path = "../../test-cases/wit"
 
 [package.metadata.component.dependencies]

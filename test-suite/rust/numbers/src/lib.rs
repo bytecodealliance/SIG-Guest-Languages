@@ -4,7 +4,9 @@ static SCALAR: AtomicU32 = AtomicU32::new(0);
 
 struct Component;
 
-impl bindings::Test for Component {
+use bindings::exports::guest_lang::tests::numbers_api::NumbersApi;
+
+impl NumbersApi for Component {
     fn roundtrip_u8(a: u8) -> u8 {
         a
     }

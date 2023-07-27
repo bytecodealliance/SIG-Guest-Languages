@@ -23,5 +23,6 @@ world numbers-test {
 
 world numbers-runner {
     import numbers-api
+    export run: func() -> bool
 }
 
