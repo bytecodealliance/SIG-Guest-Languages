@@ -23,3 +23,6 @@ The language-specific subgroups are
 * JavaScript & TypeScript (JS/TS) - organized by
   * Calvin Prewitt (JAF Labs)
   * Saúl Cabrera (Shopify)
+* Go - organized by
+  * Achille Roussel (Stealth Rocket)
+  * Jiaxiao (Joe) Zhou (Microsoft)
