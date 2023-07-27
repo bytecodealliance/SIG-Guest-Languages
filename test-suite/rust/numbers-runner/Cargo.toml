@@ -1,0 +1,20 @@
+[package]
+name = "numbers-runner"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+wit-bindgen = { version = "0.8.0", default_features = false }
+
+[lib]
+crate-type = ["cdylib"]
+
+[package.metadata.component]
+package = "component:numbers-runner"
+
+[package.metadata.component.target]
+path = "../../test-cases/wit"
+
+[package.metadata.component.dependencies]

@@ -1,0 +1,10 @@
+{
+    "tests": [
+        {
+            "name": "numbers",
+            "runner": {
+                "language": "rust"
+            }
+        }
+    ]
+}
