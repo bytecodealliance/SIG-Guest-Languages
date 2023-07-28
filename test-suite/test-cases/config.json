@@ -1,5 +1,11 @@
 {
-    "tests": [
+    "test-case": [
+        {
+            "name": "trivial",
+            "runner": {
+                "language": "rust"
+            }
+        },
         {
             "name": "numbers",
             "runner": {

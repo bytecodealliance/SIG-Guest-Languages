@@ -1,3 +1,5 @@
+cargo_component_bindings::generate!();
+
 struct Component;
 
 impl bindings::NumbersRunner for Component {
@@ -57,5 +59,3 @@ impl bindings::NumbersRunner for Component {
         true
     }
 }
-
-bindings::export!(Component);

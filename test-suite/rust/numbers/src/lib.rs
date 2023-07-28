@@ -1,3 +1,5 @@
+cargo_component_bindings::generate!();
+
 use std::sync::atomic::{AtomicU32, Ordering::SeqCst};
 
 static SCALAR: AtomicU32 = AtomicU32::new(0);
@@ -59,5 +61,3 @@ impl NumbersApi for Component {
         SCALAR.load(SeqCst)
     }
 }
-
-bindings::export!(Component);

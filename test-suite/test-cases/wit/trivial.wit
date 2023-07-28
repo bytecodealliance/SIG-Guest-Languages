@@ -1,0 +1,15 @@
+package guest-lang:tests
+
+interface trivial-api {
+  foo: func() -> u32
+}
+
+world trivial-test {
+  export trivial-api
+}
+
+world trivial-runner {
+    import trivial-api
+    export run: func() -> bool
+}
+

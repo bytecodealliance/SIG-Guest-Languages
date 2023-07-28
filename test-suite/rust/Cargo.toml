@@ -1,5 +1,7 @@
 [workspace]
 members = [
     "numbers",
-    "numbers-runner"
+    "numbers-runner",
+    "trivial",
+    "trivial-runner"
 ]
