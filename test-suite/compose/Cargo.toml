@@ -1,0 +1,8 @@
+[package]
+name = "test-suite-compose"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = { version = "1", default-features = false }
+wasm-compose = { version = "0.4", default-features = false }

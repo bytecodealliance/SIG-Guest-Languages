@@ -9,26 +9,12 @@
     fenix,
     ...
   } @ inputs: let
-    test-suite-overlay = final: prev: {
-      test-suite-wit = prev.stdenv.mkDerivation {
-        name = "test-suite-wit";
-        src = ./test-suite/test-cases/wit;
-
-        dontUnpack = true;
-        dontBuild = true;
-
-        installPhase = ''
-          mkdir -p $out
-          cp -R $src/*.wit $out
-        '';
-      };
-    };
+    mkTestSuite = import ./test-suite inputs;
   in
     with nixify.lib;
       mkFlake {
         overlays = [
           fenix.overlays.default
-          test-suite-overlay
         ];
 
         excludePaths = [
@@ -40,13 +26,34 @@
         ];
 
         withPackages = {pkgs, ...}: let
-          test-suite = import ./test-suite inputs pkgs;
+          test-suite = mkTestSuite pkgs;
         in
-          test-suite.rust.packages;
+          test-suite.compose.packages
+          // test-suite.rust.packages;
 
-        withChecks = {pkgs, ...}: let
-          test-suite = import ./test-suite inputs pkgs;
-        in
-          test-suite.rust.checks;
+        withChecks = {pkgs, ...}:
+          with pkgs.lib; let
+            test-suite = mkTestSuite pkgs;
+          in
+            mapAttrs' (name: nameValuePair "test-suite-compose-${name}") test-suite.compose.checks
+            // mapAttrs' (name: nameValuePair "test-suite-rust-${name}") test-suite.rust.checks;
+
+        withDevShells = {
+          devShells,
+          pkgs,
+          ...
+        }:
+          with pkgs.lib; let
+            test-suite = mkTestSuite pkgs;
+          in
+            extendDerivations {
+              buildInputs = [
+                test-suite.compose.packages.test-suite-compose
+                test-suite.rust.hostRustToolchain
+
+                pkgs.cargo-component
+              ];
+            }
+            devShells;
       };
 }
