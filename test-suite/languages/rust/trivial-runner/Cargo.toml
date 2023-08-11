@@ -1,5 +1,5 @@
 [package]
-name = "trivial"
+name = "trivial-runner"
 version = "0.1.0"
 edition = "2021"
 
@@ -12,10 +12,10 @@ cargo-component-bindings = { git = "https://github.com/bytecodealliance/cargo-co
 crate-type = ["cdylib"]
 
 [package.metadata.component]
-package = "test:trivial"
+package = "test:trivial-runner"
 
 [package.metadata.component.target]
-world = "trivial-test"
-path = "../../test-cases/wit"
+world = "trivial-runner"
+path = "../../../test-cases/wit"
 
 [package.metadata.component.dependencies]

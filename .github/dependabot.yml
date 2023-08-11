@@ -1,7 +1,7 @@
 version: 2
 updates:
 - package-ecosystem: "cargo"
-  directory: "/test-suite/rust"
+  directory: "/test-suite/languages/rust"
   schedule:
     interval: "daily"
 - package-ecosystem: "cargo"

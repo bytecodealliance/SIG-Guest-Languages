@@ -14,10 +14,10 @@ jobs:
     strategy:
       matrix:
         package:
-        - test-suite-rust-numbers-wasm32-unknown-unknown
-        - test-suite-rust-numbers-wasm32-wasi
-        - test-suite-rust-trivial-wasm32-unknown-unknown
-        - test-suite-rust-trivial-wasm32-wasi
+        - test-case-numbers-rust-wasm32-unknown-unknown
+        - test-case-numbers-rust-wasm32-wasi
+        - test-case-trivial-rust-wasm32-unknown-unknown
+        - test-case-trivial-rust-wasm32-wasi
 
     name: ${{ matrix.package }}
     runs-on: ubuntu-22.04

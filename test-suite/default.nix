@@ -39,47 +39,22 @@ with pkgs.lib; let
       '';
     };
 
-  f = self': let
-    mkNumbersTestComponent = lang: test:
-      mkTestComponent {
-        inherit
-          test
-          ;
-        name = "${lang}-numbers";
-        interface = "guest-lang:tests/numbers-api@0.1.0";
-        runner = "${self'.rust.packages.test-suite-rust}/lib/numbers_runner.wasm";
-      };
+  pkgs' =
+    pkgs
+    // {
+      inherit
+        mkTestComponent
+        test-suite-compose
+        test-suite-wit
+        ;
+    };
 
-    mkTrivialTestComponent = lang: test:
-      mkTestComponent {
-        inherit
-          test
-          ;
-        name = "${lang}-trivial";
-        interface = "guest-lang:tests/trivial-api@0.1.0";
-        runner = "${self'.rust.packages.test-suite-rust}/lib/trivial_runner.wasm";
-      };
-
-    pkgs' =
-      pkgs
-      // {
-        inherit
-          mkNumbersTestComponent
-          mkTestComponent
-          mkTrivialTestComponent
-          test-suite-compose
-          test-suite-wit
-          ;
-      };
-  in {
-    inherit
-      compose
-      ;
-
-    java = import ./java inputs pkgs';
-    javascript = import ./javascript inputs pkgs';
-    python = import ./python inputs pkgs';
-    rust = import ./rust inputs pkgs';
-  };
-in
-  fix f
+  languages = import ./languages inputs pkgs';
+  test-cases = import ./test-cases inputs pkgs' languages;
+in {
+  inherit
+    compose
+    languages
+    test-cases
+    ;
+}

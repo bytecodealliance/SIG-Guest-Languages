@@ -20,7 +20,6 @@ with nixify.lib.rust; let
       targets.x86_64-unknown-linux-musl = false;
 
       buildOverrides = {pkgs, ...}: {
-        preBuild ? "",
         postPatch ? "",
         nativeBuildInputs ? [],
         CARGO_BUILD_TARGET ? "",
@@ -38,11 +37,11 @@ with nixify.lib.rust; let
           postPatch =
             postPatch
             + ''
-              substituteInPlace "./numbers-runner/Cargo.toml" --replace '../../test-cases/wit' '${pkgs.test-suite-wit}'
-              substituteInPlace "./numbers/Cargo.toml" --replace '../../test-cases/wit' '${pkgs.test-suite-wit}'
+              substituteInPlace "./numbers-runner/Cargo.toml" --replace '../../../test-cases/wit' '${pkgs.test-suite-wit}'
+              substituteInPlace "./numbers/Cargo.toml" --replace '../../../test-cases/wit' '${pkgs.test-suite-wit}'
 
-              substituteInPlace "./trivial-runner/Cargo.toml" --replace '../../test-cases/wit' '${pkgs.test-suite-wit}'
-              substituteInPlace "./trivial/Cargo.toml" --replace '../../test-cases/wit' '${pkgs.test-suite-wit}'
+              substituteInPlace "./trivial-runner/Cargo.toml" --replace '../../../test-cases/wit' '${pkgs.test-suite-wit}'
+              substituteInPlace "./trivial/Cargo.toml" --replace '../../../test-cases/wit' '${pkgs.test-suite-wit}'
             '';
 
           nativeBuildInputs =
@@ -56,19 +55,9 @@ with nixify.lib.rust; let
 in
   attrs
   // {
+    getRunner = name: target: "${attrs.packages."test-suite-rust-${target}"}/lib/${name}_runner.wasm";
+    getTest = name: target: "${attrs.packages."test-suite-rust-${target}"}/lib/${name}.wasm";
+
     # TODO: Add support for `cargoClippyCommand`, `cargoDocCommand` and `cargoNextestCommand` to `crane` and re-enable
-    checks = filterAttrs (name: _: name != "clippy" && name != "doc" && name != "nextest") attrs.checks;
-
-    packages = let
-      mkNumbersTestComponent = pkg: pkgs.mkNumbersTestComponent "rust" "${pkg}/lib/numbers.wasm";
-      mkTrivialTestComponent = pkg: pkgs.mkTrivialTestComponent "rust" "${pkg}/lib/trivial.wasm";
-    in
-      attrs.packages
-      // {
-        test-suite-rust-numbers-wasm32-unknown-unknown = mkNumbersTestComponent attrs.packages.test-suite-rust-wasm32-unknown-unknown;
-        test-suite-rust-numbers-wasm32-wasi = mkNumbersTestComponent attrs.packages.test-suite-rust-wasm32-wasi;
-
-        test-suite-rust-trivial-wasm32-unknown-unknown = mkTrivialTestComponent attrs.packages.test-suite-rust-wasm32-unknown-unknown;
-        test-suite-rust-trivial-wasm32-wasi = mkTrivialTestComponent attrs.packages.test-suite-rust-wasm32-wasi;
-      };
+    checks = mapAttrs' (name: nameValuePair "test-suite-rust-${name}") (filterAttrs (name: _: name != "clippy" && name != "doc" && name != "nextest") attrs.checks);
   }

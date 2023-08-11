@@ -36,18 +36,22 @@
           "README.md"
         ];
 
-        withPackages = {pkgs, ...}: let
-          test-suite = mkTestSuite pkgs;
-        in
-          test-suite.compose.packages
-          // test-suite.rust.packages;
+        withPackages = {pkgs, ...}:
+          with pkgs.lib; let
+            test-suite = mkTestSuite pkgs;
+            language-packages = foldl' (prev: {packages ? {}, ...}: prev // packages) {} (attrValues test-suite.languages);
+          in
+            test-suite.compose.packages
+            // test-suite.test-cases.packages
+            // language-packages;
 
         withChecks = {pkgs, ...}:
           with pkgs.lib; let
             test-suite = mkTestSuite pkgs;
+            language-checks = foldl' (prev: {checks ? {}, ...}: prev // checks) {} (attrValues test-suite.languages);
           in
             mapAttrs' (name: nameValuePair "test-suite-compose-${name}") test-suite.compose.checks
-            // mapAttrs' (name: nameValuePair "test-suite-rust-${name}") test-suite.rust.checks;
+            // language-checks;
 
         withDevShells = {
           devShells,
@@ -60,7 +64,7 @@
             extendDerivations {
               buildInputs = [
                 test-suite.compose.packages.test-suite-compose
-                test-suite.rust.hostRustToolchain
+                test-suite.languages.rust.hostRustToolchain
 
                 pkgs.cargo-component
               ];
