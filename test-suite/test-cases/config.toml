@@ -1,0 +1,15 @@
+[trivial]
+interface = "guest-lang:tests/trivial-api@0.1.0"
+languages = [
+    "rust",
+    # TODO: Add other languages once build supported
+]
+runner = "rust"
+
+[numbers]
+interface = "guest-lang:tests/numbers-api@0.1.0"
+languages = [
+    "rust",
+    # TODO: Add other languages once build supported and test cases implemented
+]
+runner = "rust"
