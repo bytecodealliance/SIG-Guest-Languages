@@ -28,4 +28,4 @@ The language-specific subgroups are
   * Jiaxiao (Joe) Zhou (Microsoft) 
 * C#/.net - organized by
   * Timmy Silesmo - (nor²)
-  * Scott Wayne
+  * Scott Waye
