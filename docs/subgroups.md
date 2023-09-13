@@ -29,3 +29,5 @@ The language-specific subgroups are
 * C#/.net - organized by
   * Timmy Silesmo - (nor²)
   * Scott Waye
+  * Danilo (Dan) Chiarlone (Microsoft)
+
