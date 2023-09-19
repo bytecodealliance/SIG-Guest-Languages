@@ -25,4 +25,9 @@ The language-specific subgroups are
   * Saúl Cabrera (Shopify)
 * Go - organized by
   * Achille Roussel (Stealth Rocket)
-  * Jiaxiao (Joe) Zhou (Microsoft)
+  * Jiaxiao (Joe) Zhou (Microsoft) 
+* C#/.net - organized by
+  * Timmy Silesmo - (nor²)
+  * Scott Waye
+  * Danilo (Dan) Chiarlone (Microsoft)
+
