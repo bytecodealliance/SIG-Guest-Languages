@@ -30,4 +30,5 @@ The language-specific subgroups are
   * Timmy Silesmo - (nor²)
   * Scott Waye
   * Danilo (Dan) Chiarlone (Microsoft)
-
+* Rust - orgnaized by
+  * Peter Huene (Fastly)
