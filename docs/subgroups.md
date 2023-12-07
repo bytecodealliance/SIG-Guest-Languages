@@ -32,3 +32,4 @@ The language-specific subgroups are
   * Danilo (Dan) Chiarlone (Microsoft)
 * Rust - organized by
   * Peter Huene (Fastly)
+  * Alex Crichton (Fermyon)
