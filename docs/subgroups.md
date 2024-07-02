@@ -24,7 +24,7 @@ The language-specific subgroups are
   * Calvin Prewitt (JAF Labs)
   * Saúl Cabrera (Shopify)
 * Go - organized by
-  * Achille Roussel (Stealth Rocket)
+  * Damian Gryski (Fastly)
   * Jiaxiao (Joe) Zhou (Microsoft) 
 * C#/.net - organized by
   * Timmy Silesmo - (nor²)
